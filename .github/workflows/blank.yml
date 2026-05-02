@@ -20,7 +20,8 @@ jobs:
           $PasswordStr = "WinRunner@GitHub2026!"
           $Password = ConvertTo-SecureString $PasswordStr -AsPlainText -Force
           
-          New-LocalUser -Name "RemoteAdmin" -Password $Password -PasswordNeverExpires $true
+          # Removed the invalid -PasswordNeverExpires parameter
+          New-LocalUser -Name "RemoteAdmin" -Password $Password
           Add-LocalGroupMember -Group "Administrators" -Member "RemoteAdmin"
           
           echo "RDP_USER=RemoteAdmin" >> $env:GITHUB_ENV
