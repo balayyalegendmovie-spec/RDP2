@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 jobs:
   rdp-session:
-    runs-on: windows-2022-96core 
+    runs-on: windows-latest 
 
     steps:
       - name: Establish Tailscale Connection
