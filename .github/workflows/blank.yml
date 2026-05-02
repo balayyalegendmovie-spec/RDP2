@@ -17,13 +17,13 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0
           Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
           
-          $PasswordStr = "RDP-Session-2026!@#"
+          $PasswordStr = "WinRunner@GitHub2026!"
           $Password = ConvertTo-SecureString $PasswordStr -AsPlainText -Force
           
-          New-LocalUser -Name "RDP" -Password $Password
-          Add-LocalGroupMember -Group "Administrators" -Member "RDP"
+          New-LocalUser -Name "RemoteAdmin" -Password $Password -PasswordNeverExpires $true
+          Add-LocalGroupMember -Group "Administrators" -Member "RemoteAdmin"
           
-          echo "RDP_USER=RDP" >> $env:GITHUB_ENV
+          echo "RDP_USER=RemoteAdmin" >> $env:GITHUB_ENV
           echo "RDP_PASS=$PasswordStr" >> $env:GITHUB_ENV
 
       - name: Establish Tailscale Connection
